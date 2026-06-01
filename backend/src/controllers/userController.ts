@@ -1,6 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { parseJsonBody } from '../utils/bodyParser.js';
-import { authenticateUser } from '../utils/authUtils.js';
 import { updateFullName, updatePassword } from '../repositories/authRepository.js';
 import { hashPassword } from '../utils/hashPassword.js';
 import { validateUpdateUserInput } from '../utils/validation.js'

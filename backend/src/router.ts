@@ -22,7 +22,7 @@ export async function handleRequests(req: IncomingMessage, res: ServerResponse) 
 
     if (url === '/api/user/update' && method === 'PUT') {
         return authenticateToken(req, res, async (userId) => {
-            await updateUser(req, res, userId); // Подаваме userId на контролера
+            await updateUser(req, res, userId); 
         });
     }
 

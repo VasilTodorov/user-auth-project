@@ -1,5 +1,5 @@
 import { IncomingMessage } from 'http';
-import jwt, { JwtPayload } from 'jsonwebtoken'; // 1. Импортираме JwtPayload
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export function authenticateUser(req: IncomingMessage): { id: number; email: string } | null {
     try {

@@ -3,21 +3,16 @@
     "target": "esnext",
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "types": ["node"],
-    
-    // Къде да търси кода и къде да го компилира
+    "types": ["node", "jest"],        
+    "isolatedModules": true,
     "rootDir": "./",
     "outDir": "./dist",
-    
-    // Стриктни проверки за сигурност на кода
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    
-    // Полезно за дебъгване
     "sourceMap": true
   },
   "include": ["backend/src/**/*", "shared/**/*"],
