@@ -24,9 +24,10 @@ export async function startServer() {
             }
         });
 
-        const port = parseInt(process.env.PORT || '8080', 10);
-        server.listen(port, () => {
-            console.log(`Server is running on port ${port}`);
+        const PORT = process.env.PORT || 3000;
+        const HOST = process.env.DB_HOST || 'localhost';
+        server.listen(PORT, () => {
+            console.log(`Server is running on http://${HOST}:${PORT}`);
         });
     } catch (err) {
         console.error('Connection error:', err);
