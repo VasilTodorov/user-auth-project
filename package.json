@@ -9,7 +9,8 @@
     "dev:frontend": "esbuild frontend/src/app.ts --bundle --outfile=dist/frontend/public/app.js --sourcemap --tsconfig=tsconfig.frontend.json --watch",
     "build:backend": "tsc",
     "build:frontend": "esbuild frontend/src/app.ts --bundle --outfile=dist/frontend/public/app.js --sourcemap --tsconfig=tsconfig.frontend.json",
-    "build": "npm run build:backend && npm run build:frontend"
+    "build": "npm run build:backend && npm run build:frontend",
+    "start": "node dist/backend/src/server.js"
   },
   "keywords": [],
   "author": "",
