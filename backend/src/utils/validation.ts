@@ -1,3 +1,5 @@
+import jwt, { JwtPayload } from 'jsonwebtoken';
+
 export function validateRegistrateUserInput(input: {
   email?: string;
   full_name?: string;
@@ -86,4 +88,24 @@ export function validateUpdateUserInput(input: {
   }
 
   return errors;
+}
+
+export function validateCaptcha(captchaAnswer: any, captchaToken: string | undefined): string | null {
+    if (captchaAnswer === undefined || !captchaToken) {
+        return 'CAPTCHA solution and token are required';
+    }
+
+    try {
+        const secret = process.env.JWT_SECRET || 'super_secret_fallback_key';
+        
+        const decoded = jwt.verify(captchaToken, secret) as JwtPayload;
+
+        if (String(captchaAnswer).trim() !== String(decoded.answer)) {
+            return 'Incorrect CAPTCHA answer. Try again.';
+        }
+
+        return null; 
+    } catch (captchaErr) {
+        return 'CAPTCHA session expired or invalid. Please refresh.';
+    }
 }

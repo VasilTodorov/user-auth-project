@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { parseJsonBody } from '../utils/bodyParser.js';
 import { insertUser } from '../repositories/authRepository.js';
-import { validateLoginUserInput, validateRegistrateUserInput } from '../utils/validation.js'
+import { validateCaptcha, validateLoginUserInput, validateRegistrateUserInput } from '../utils/validation.js'
 import { hashPassword } from '../utils/hashPassword.js';
 import { getUserByEmail } from '../repositories/authRepository.js';
 import jwt from 'jsonwebtoken';
@@ -11,7 +11,13 @@ export async function registerUser(req: IncomingMessage, res: ServerResponse) {
     try {
         const body = await parseJsonBody(req);
         
-        const { email, full_name, password } = body;
+        const { email, full_name, password, captchaAnswer, captchaToken } = body;
+
+        const captchaError = validateCaptcha(captchaAnswer, captchaToken);
+        if (captchaError) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ message: captchaError }));
+        }
 
         const validation_error = validateRegistrateUserInput({email, full_name, password});
         if(validation_error.length > 0) {
