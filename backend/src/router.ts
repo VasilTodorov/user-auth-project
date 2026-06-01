@@ -1,7 +1,8 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { loginUser, registerUser } from './controllers/authController.js';
+import { getCurrentUser, loginUser, registerUser } from './controllers/authController.js';
 import { updateUser } from './controllers/userController.js';
 import { getCaptcha } from './controllers/captchaController.js';
+import { authenticateToken } from './utils/auth.js';
 
 export async function handleRequests(req: IncomingMessage, res: ServerResponse) {
     const { method, url } = req;
@@ -20,7 +21,15 @@ export async function handleRequests(req: IncomingMessage, res: ServerResponse) 
     }
 
     if (url === '/api/user/update' && method === 'PUT') {
-        return await updateUser(req, res);
+        return authenticateToken(req, res, async (userId) => {
+            await updateUser(req, res, userId); // Подаваме userId на контролера
+        });
+    }
+
+    if (url === '/api/user/me' && method === 'GET') {
+        return authenticateToken(req, res, async (userId) => {
+            await getCurrentUser(res, userId);
+        });
     }
 
     if (url === '/api/captcha' && method === 'GET') {

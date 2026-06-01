@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { parseJsonBody } from '../utils/bodyParser.js';
-import { insertUser } from '../repositories/authRepository.js';
+import { findUserById, insertUser } from '../repositories/authRepository.js';
 import { validateCaptcha, validateLoginUserInput, validateRegistrateUserInput } from '../utils/validation.js'
 import { hashPassword } from '../utils/hashPassword.js';
 import { getUserByEmail } from '../repositories/authRepository.js';
@@ -88,5 +88,24 @@ export async function loginUser(req: IncomingMessage, res: ServerResponse) {
     } catch (err) {
         console.error('Error in login:', err);
         throw err; 
+    }
+}
+
+export async function getCurrentUser(res: ServerResponse, userId: number) {
+    try {
+        const user = await findUserById(userId);
+        
+        if (!user) {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ message: 'User not found' }));
+        }
+        
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ 
+            user: { full_name: user.full_name, email: user.email } 
+        }));
+    } catch (err) {
+        console.error('Error fetching current user:', err);
+        throw err;
     }
 }

@@ -5,30 +5,24 @@ import { updateFullName, updatePassword } from '../repositories/authRepository.j
 import { hashPassword } from '../utils/hashPassword.js';
 import { validateUpdateUserInput } from '../utils/validation.js'
 
-export async function updateUser(req: IncomingMessage, res: ServerResponse) {
+export async function updateUser(req: IncomingMessage, res: ServerResponse, userId: number) {
     try {
-        const user = authenticateUser(req);
-        if (!user) {
-            res.writeHead(401, { 'Content-Type': 'application/json' });
-            return res.end(JSON.stringify({ message: 'Unauthorized. Invalid or missing token.' }));
-        }
-
         const body = await parseJsonBody(req);
         const { full_name, password } = body;
 
-        const errors = validateUpdateUserInput({ full_name, password });
-        if (errors.length > 0) {
+        const validation_errors = validateUpdateUserInput({ full_name, password });
+        if (validation_errors.length > 0) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
-            return res.end(JSON.stringify({ message: 'Validation failed', errors }));
+            return res.end(JSON.stringify({ message: 'Validation failed', errors: validation_errors }));
         }
 
         if (full_name) {
-            await updateFullName(user.id, full_name); 
+            await updateFullName(userId, full_name); 
         }
 
         if (password) {
             const newHash = await hashPassword(password);
-            await updatePassword(user.id, newHash); 
+            await updatePassword(userId, newHash); 
         }
         
         res.writeHead(200, { 'Content-Type': 'application/json' });

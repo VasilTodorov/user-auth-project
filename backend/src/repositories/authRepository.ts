@@ -23,6 +23,19 @@ export async function getUserByEmail(email: string) {
     }
 }
 
+export async function findUserById(id: number): Promise<{ id: number; full_name: string; email: string } | null> {
+    const result = await query(
+        'SELECT id, full_name, email FROM users WHERE id = $1',
+        [id]
+    );
+
+    if (result.rows.length === 0) {
+        return null;
+    }
+
+    return result.rows[0];
+}
+
 export async function updateFullName(userId: number, newName: string) {
     const query_text = 'UPDATE Users SET full_name = $1 WHERE id = $2 RETURNING *';
     const result = await query(query_text, [newName, userId]);

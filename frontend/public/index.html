@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Auth System</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav id="main-nav">
+            <button id="nav-login-btn">Login</button>
+            <button id="nav-register-btn">Register</button>
+            <button id="nav-logout-btn" style="display: none;">Logout</button>
+        </nav>
+
+        <div id="message-box" class="message" style="display: none;"></div>
+
+        <section id="login-section" class="auth-card">
+            <h2>Sign In</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" required placeholder="name@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+        </section>
+
+        <section id="register-section" class="auth-card" style="display: none;">
+            <h2>Create Account</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" required placeholder="name@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" required placeholder="Min. 8 characters">
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm-password">Confirm Password</label>
+                    <input type="password" id="reg-confirm-password" required placeholder="Repeat your password">
+                </div>
+
+                <div class="captcha-container">
+                    <label id="captcha-question">Loading security question...</label>
+                    <input type="text" id="captcha-answer" required placeholder="Your answer">
+                    <input type="hidden" id="captcha-token">
+                    <button type="button" id="refresh-captcha-btn" class="btn-text">🔄 Refresh</button>
+                </div>
+
+                <button type="submit" class="btn-primary">Register</button>
+            </form>
+        </section>
+
+        <section id="profile-section" class="auth-card" style="display: none;">
+            <h2>User Profile</h2>
+            <p class="welcome-text">Welcome back, <span id="user-display-name"></span>!</p>
+            
+            <form id="update-profile-form">
+                <h3>Update Personal Information</h3>
+                <div class="form-group">
+                    <label for="update-name">New Full Name</label>
+                    <input type="text" id="update-name" placeholder="Leave blank to keep current">
+                </div>
+                <div class="form-group">
+                    <label for="update-password">New Password</label>
+                    <input type="password" id="update-password" placeholder="Leave blank to keep current">
+                </div>
+                <button type="submit" class="btn-primary">Update Profile</button>
+            </form>
+        </section>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

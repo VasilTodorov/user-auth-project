@@ -9,14 +9,12 @@ module.exports = {
     ...tsJestTransformCfg,
   },
   
-  // Включваме покритието
   collectCoverage: true,
   coverageDirectory: 'coverage',
   
-  // ТОЧНО ТУК: Казваме му кои файлове да анализира за покритие
   collectCoverageFrom: [
-    'backend/src/**/*.ts',   // Включи всички TS файлове от backend src
-    '!backend/src/**/*.d.ts' // Изключи TypeScript дефиниционните файлове, ако има такива
+    'backend/src/**/*.ts',   
+    '!backend/src/**/*.d.ts' 
   ],
   
   testMatch: ['**/backend/tests/**/*.test.ts'],
