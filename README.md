@@ -74,6 +74,7 @@ npm run start
 ```bash
 npm run test
 ```
+
 ### 📂 Структура на проекта
 backend/src/server.ts – Входна точка на HTTP сървъра.
 
@@ -92,3 +93,13 @@ backend/tests/ – Папка с автоматизирани unit тестов�
 frontend/src/app.ts – Главен TypeScript файл, управляващ Single Page интерфейса (SPA) на клиента.
 
 frontend/public/ – Статични ресурси (HTML, CSS, компилиран JS).
+
+### 📸 Снимки
+#### Login
+<img width="1516" height="1106" alt="Login" src="https://github.com/user-attachments/assets/3b5a0d1b-4f4e-48a4-85ff-4a6410cd0560" />
+#### Register
+<img width="1420" height="1118" alt="Register" src="https://github.com/user-attachments/assets/3c1a9656-1388-41eb-bfe5-5ef794e18fd9" />
+#### User Page
+<img width="1034" height="994" alt="UserPage" src="https://github.com/user-attachments/assets/bd0fa014-525c-4695-b70a-c6e03fc4e4c1" />
+
+
