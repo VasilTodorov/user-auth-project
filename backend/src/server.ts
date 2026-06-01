@@ -11,7 +11,7 @@ export async function startServer() {
             try {
                 await handleRequests(req, res); // 2. Добавено await
             } catch (err) {
-                console.error('Критична грешка в сървъра:', err);
+                console.error('Critical error in server:', err);
                 // Ако нещо се счупи брутално, връщаме 500 на клиента, вместо да зависва заявката
                 if (!res.writableEnded) {
                     res.writeHead(500, { 'Content-Type': 'application/json' });

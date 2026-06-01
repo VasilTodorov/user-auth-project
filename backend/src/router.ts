@@ -1,5 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { registerUser } from './controllers/authController.js';
+import { loginUser, registerUser } from './controllers/authController.js';
+import { updateUser } from './controllers/userController.js';
 
 export async function handleRequests(req: IncomingMessage, res: ServerResponse) {
     const { method, url } = req;
@@ -9,8 +10,7 @@ export async function handleRequests(req: IncomingMessage, res: ServerResponse) 
     }
 
     if (url === '/api/login' && method === 'POST') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ message: 'Login route hit' }));
+        return await loginUser(req, res);
     }
 
     if (url === '/api/logout' && method === 'POST') {
@@ -19,8 +19,7 @@ export async function handleRequests(req: IncomingMessage, res: ServerResponse) 
     }
 
     if (url === '/api/user/update' && method === 'PUT') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ message: 'User update route hit' }));
+        return await updateUser(req, res);
     }
 
     res.writeHead(404, { 'Content-Type': 'application/json' });
