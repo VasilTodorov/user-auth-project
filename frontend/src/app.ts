@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadCaptcha(); 
             }
         } catch (err) {
-            showMessage('1-Server connection failed.', 'error');
+            showMessage('Server connection failed.', 'error');
         }
     });
 
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showMessage(data.message || 'Invalid credentials.', 'error');
             }
         } catch (err) {
-            showMessage('2-Server connection failed.', 'error');
+            showMessage('Server connection failed.', 'error');
         }
     });
 
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showMessage(errorMsg || 'Update failed', 'error');
             }
         } catch (err) {
-            showMessage('3-Server connection failed.', 'error');
+            showMessage('Server connection failed.', 'error');
             console.log(err)
         }
     });

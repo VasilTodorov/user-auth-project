@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest run --coverage --globals --coverage.exclude='backend/src/config/**' --coverage.exclude='backend/src/repositories/**'",
+    "test": "vitest run",
     "dev:backend": "tsx watch backend/src/server.ts",
     "dev:frontend": "esbuild frontend/src/app.ts --bundle --outfile=dist/frontend/public/app.js --sourcemap --tsconfig=tsconfig.frontend.json --watch",
     "build:backend": "tsc",

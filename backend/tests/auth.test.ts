@@ -26,7 +26,7 @@ describe('Auth Middleware', () => {
 
     test('should call next with id if token is valid', () => {
         mockReq.headers!['authorization'] = 'Bearer valid_token';
-        (jwt.verify as Mock).mockReturnValue({ id: 42 }); // <-- Използваме Mock от vitest
+        (jwt.verify as Mock).mockReturnValue({ id: 42 });
 
         authenticateToken(mockReq as IncomingMessage, mockRes as ServerResponse, nextMock);
         expect(nextMock).toHaveBeenCalledWith(42);

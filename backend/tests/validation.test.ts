@@ -51,13 +51,13 @@ describe('Validation Utilities', () => {
         });
 
         test('should return error for wrong answers', () => {
-            (jwt.verify as jest.Mock).mockReturnValue({ answer: 10 });
+            vi.mocked(jwt.verify).mockReturnValue({ answer: 10 } as any);
             const err = validateCaptcha(5, 'mockToken');
             expect(err).toBe('Incorrect CAPTCHA answer. Try again.');
         });
 
         test('should pass for correct string matched answer', () => {
-            (jwt.verify as jest.Mock).mockReturnValue({ answer: 10 });
+            vi.mocked(jwt.verify).mockReturnValue({ answer: 10 } as any);
             const err = validateCaptcha('10', 'mockToken');
             expect(err).toBeNull();
         });
